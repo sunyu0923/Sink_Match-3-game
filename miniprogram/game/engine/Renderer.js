@@ -189,10 +189,20 @@ class Renderer {
     ctx.fillStyle = colors[item.type] || '#999';
     ctx.globalAlpha = (item.alpha || 1) * 0.85;
 
-    // 圆角矩形
+    // 圆角矩形（手动 arcTo，兼容微信小游戏）
     const r = 8;
+    const x = -w / 2, y = -h / 2;
     ctx.beginPath();
-    ctx.roundRect(-w / 2, -h / 2, w, h, r);
+    ctx.moveTo(x + r, y);
+    ctx.lineTo(x + w - r, y);
+    ctx.arcTo(x + w, y, x + w, y + r, r);
+    ctx.lineTo(x + w, y + h - r);
+    ctx.arcTo(x + w, y + h, x + w - r, y + h, r);
+    ctx.lineTo(x + r, y + h);
+    ctx.arcTo(x, y + h, x, y + h - r, r);
+    ctx.lineTo(x, y + r);
+    ctx.arcTo(x, y, x + r, y, r);
+    ctx.closePath();
     ctx.fill();
 
     // 边框
