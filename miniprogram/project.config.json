@@ -25,6 +25,25 @@
     "showShadowRootInWxmlPanel": false,
     "packNpmManually": false,
     "enableEngineNative": false,
-    "useStaticServer": false
-  }
+    "useStaticServer": false,
+    "postcss": false,
+    "compileWorklet": false,
+    "packNpmRelationList": [],
+    "minifyWXSS": true,
+    "minifyWXML": true,
+    "localPlugins": false,
+    "disableUseStrict": false,
+    "useCompilerPlugins": false,
+    "condition": false,
+    "swc": false,
+    "disableSWC": true,
+    "babelSetting": {
+      "ignore": [],
+      "disablePlugins": [],
+      "outputPath": ""
+    }
+  },
+  "simulatorPluginLibVersion": {},
+  "isGameTourist": false,
+  "editorSetting": {}
 }

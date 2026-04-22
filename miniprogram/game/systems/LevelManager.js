@@ -1,4 +1,4 @@
-const levelsData = require('../data/levels.json');
+const levelsData = require('../data/levels');
 
 class LevelManager {
   constructor() {
