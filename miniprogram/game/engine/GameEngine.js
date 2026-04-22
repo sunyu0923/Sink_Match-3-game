@@ -14,20 +14,12 @@ const STATE = {
 };
 
 class GameEngine {
-  constructor(canvas, canvasWidth, canvasHeight, dpr) {
-    this.canvas = canvas;
-    this.ctx = canvas.getContext('2d');
+  constructor(ctx, canvasWidth, canvasHeight) {
+    this.ctx = ctx;
     this.width = canvasWidth;
     this.height = canvasHeight;
-    this.dpr = dpr;
-
-    canvas.width = canvasWidth * dpr;
-    canvas.height = canvasHeight * dpr;
-    this.ctx.scale(dpr, dpr);
 
     this.state = STATE.LOADING;
-    this.lastTime = 0;
-    this.rafId = null;
 
     // 子系统
     this.renderer = new Renderer(this.ctx, canvasWidth, canvasHeight);
@@ -78,24 +70,19 @@ class GameEngine {
     this._notifyStateChange();
     this._notifyQueueChange();
     this._notifyGoalChange();
-
-    this.lastTime = Date.now();
-    this._loop();
   }
 
-  _loop() {
-    const now = Date.now();
-    const dt = Math.min((now - this.lastTime) / 1000, 0.05); // cap at 50ms
-    this.lastTime = now;
-
+  /** 由 SceneManager 每帧调用 */
+  update(dt) {
     if (this.state === STATE.PLAYING) {
       this.physicsLite.update(dt, this.sinkPool.items);
       this.animationManager.update(dt);
     }
+  }
 
+  /** 渲染水槽区域（ctx 已平移到水槽左上角） */
+  renderSink(ctx) {
     this.renderer.render(this.sinkPool, this.animationManager);
-
-    this.rafId = this.canvas.requestAnimationFrame(() => this._loop());
   }
 
   /** 暂停/恢复 */
@@ -273,10 +260,8 @@ class GameEngine {
 
   /** 销毁 */
   destroy() {
-    if (this.rafId) {
-      this.canvas.cancelAnimationFrame(this.rafId);
-      this.rafId = null;
-    }
+    this.state = STATE.LOADING;
+    this.animationManager.clear();
   }
 }
 

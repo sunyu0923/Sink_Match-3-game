@@ -1,8 +1,0 @@
-{
-  "usingComponents": {
-    "game-hud": "/components/game-hud/game-hud",
-    "slot-bar": "/components/slot-bar/slot-bar",
-    "tool-bar": "/components/tool-bar/tool-bar"
-  },
-  "disableScroll": true
-}

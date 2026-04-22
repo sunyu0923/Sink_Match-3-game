@@ -3,19 +3,19 @@ const { pointInRect } = require('../../utils/math');
 class InputHandler {
   constructor(engine) {
     this.engine = engine;
-    this.touching = false;
+    this.offsetX = 0;
+    this.offsetY = 0;
   }
 
-  onTouchStart(e) {
+  /**
+   * 外部调用：传入相对水槽区域的坐标
+   * @param {number} x - 相对水槽左上角的 x
+   * @param {number} y - 相对水槽左上角的 y
+   */
+  hitTest(x, y) {
     if (this.engine.state !== 'PLAYING') return;
 
-    const touch = e.touches[0];
-    const x = touch.x;
-    const y = touch.y;
-
-    // 从最上层开始反向遍历，找到第一个可点击的厨具
     const items = this.engine.sinkPool.getVisibleItems();
-    // 按层级降序 + y 降序排列（最上层最先检测）
     const sorted = items.slice().sort((a, b) => {
       if (a.layer !== b.layer) return b.layer - a.layer;
       return b.y - a.y;
@@ -34,13 +34,14 @@ class InputHandler {
     }
   }
 
-  onTouchMove(e) {
-    // 暂不需要拖拽
+  onTouchStart(e) {
+    const touch = e.touches[0];
+    this.hitTest(touch.x - this.offsetX, touch.y - this.offsetY);
   }
 
-  onTouchEnd(e) {
-    this.touching = false;
-  }
+  onTouchMove(e) {}
+
+  onTouchEnd(e) {}
 }
 
 module.exports = InputHandler;
