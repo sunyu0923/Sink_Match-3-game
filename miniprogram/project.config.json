@@ -1,0 +1,30 @@
+{
+  "appid": "wxa77860397b7a4b1b",
+  "projectname": "sink-match3",
+  "compileType": "game",
+  "libVersion": "2.30.4",
+  "packOptions": {
+    "ignore": [],
+    "include": []
+  },
+  "setting": {
+    "coverView": false,
+    "es6": true,
+    "enhance": false,
+    "minified": false,
+    "newFeature": true,
+    "nodeModules": false,
+    "autoAudits": false,
+    "uglifyFileName": false,
+    "ignoreUploadUnusedFiles": false,
+    "uploadWithSourceMap": false,
+    "useIsolateContext": false,
+    "useMultiFrameRuntime": false,
+    "useApiHook": false,
+    "useApiEventHook": false,
+    "showShadowRootInWxmlPanel": false,
+    "packNpmManually": false,
+    "enableEngineNative": false,
+    "useStaticServer": false
+  }
+}
