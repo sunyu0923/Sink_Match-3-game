@@ -1,0 +1,20 @@
+<view class="tool-bar">
+  <view
+    class="tool-btn"
+    wx:for="{{tools}}"
+    wx:key="type"
+    data-type="{{item.type}}"
+    bindtap="onToolTap"
+  >
+    <view class="tool-icon-wrap">
+      <text class="tool-icon">{{item.icon}}</text>
+      <view class="tool-badge" wx:if="{{powerUps[item.key] > 0}}">
+        <text class="badge-text">{{powerUps[item.key]}}</text>
+      </view>
+      <view class="tool-badge tool-badge-ad" wx:else>
+        <text class="badge-text">+</text>
+      </view>
+    </view>
+    <text class="tool-name">{{item.name}}</text>
+  </view>
+</view>

@@ -1,0 +1,15 @@
+{
+  "pages": [
+    "pages/home/home",
+    "pages/game/game",
+    "pages/levels/levels"
+  ],
+  "window": {
+    "navigationStyle": "custom",
+    "backgroundColor": "#8B6914",
+    "backgroundTextStyle": "light"
+  },
+  "usingComponents": {},
+  "sitemapLocation": "sitemap.json",
+  "style": "v2"
+}

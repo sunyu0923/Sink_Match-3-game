@@ -1,0 +1,68 @@
+<view class="game-page">
+  <!-- 顶部 HUD -->
+  <game-hud
+    level-id="{{levelId}}"
+    goals="{{goals}}"
+    game-state="{{gameState}}"
+    bind:pause="onPause"
+  />
+
+  <!-- 槽位栏（盘子 + 队列） -->
+  <slot-bar
+    queue="{{queue}}"
+    plates="{{plates}}"
+    plate-unlocked="{{plateUnlocked}}"
+    extra-slots="{{extraSlots}}"
+    bind:unlockplate="onUnlockPlate"
+    bind:plateclick="onPlateClick"
+  />
+
+  <!-- Canvas 游戏区（水槽） -->
+  <view class="canvas-container">
+    <canvas
+      id="gameCanvas"
+      type="2d"
+      style="width: {{canvasWidth}}px; height: {{canvasHeight}}px;"
+      bindtouchstart="onCanvasTouchStart"
+      bindtouchmove="onCanvasTouchMove"
+      bindtouchend="onCanvasTouchEnd"
+    />
+  </view>
+
+  <!-- 底部道具工具栏 -->
+  <tool-bar
+    power-ups="{{powerUps}}"
+    bind:powerup="onPowerUp"
+  />
+
+  <!-- 暂停弹窗 -->
+  <view class="modal-overlay" wx:if="{{showPauseModal}}">
+    <view class="modal-box">
+      <text class="modal-title">游戏暂停</text>
+      <view class="modal-btns">
+        <button class="btn-resume" bindtap="onResume">继续</button>
+        <button class="btn-quit" bindtap="onBackToHome">退出</button>
+      </view>
+    </view>
+  </view>
+
+  <!-- 结算弹窗 -->
+  <view class="modal-overlay" wx:if="{{showResultModal}}">
+    <view class="modal-box">
+      <text class="modal-title">{{gameState === 'WIN' ? '恭喜过关！' : '挑战失败'}}</text>
+
+      <!-- 星星 -->
+      <view class="stars-row" wx:if="{{gameState === 'WIN'}}">
+        <text class="star {{resultStars >= 1 ? 'star-active' : ''}}">★</text>
+        <text class="star {{resultStars >= 2 ? 'star-active' : ''}}">★</text>
+        <text class="star {{resultStars >= 3 ? 'star-active' : ''}}">★</text>
+      </view>
+
+      <view class="modal-btns">
+        <button class="btn-retry" bindtap="onRetry">再试一次</button>
+        <button class="btn-next" wx:if="{{gameState === 'WIN'}}" bindtap="onNextLevel">下一关</button>
+        <button class="btn-quit" bindtap="onBackToHome">返回</button>
+      </view>
+    </view>
+  </view>
+</view>

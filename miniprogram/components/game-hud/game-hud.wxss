@@ -1,0 +1,92 @@
+.hud {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16rpx 24rpx;
+  padding-top: calc(env(safe-area-inset-top) + 16rpx);
+  background: rgba(0,0,0,0.15);
+}
+
+.hud-left {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+
+.pause-btn {
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pause-icon {
+  font-size: 32rpx;
+  color: #fff;
+}
+
+.level-badge {
+  background: rgba(0,0,0,0.4);
+  padding: 8rpx 24rpx;
+  border-radius: 24rpx;
+}
+
+.level-text {
+  font-size: 28rpx;
+  color: #fff;
+  font-weight: bold;
+}
+
+.hud-goals {
+  display: flex;
+  gap: 16rpx;
+}
+
+.goal-item {
+  display: flex;
+  align-items: center;
+  background: #FFF8E7;
+  padding: 8rpx 16rpx;
+  border-radius: 16rpx;
+  gap: 4rpx;
+}
+
+.goal-icon-wrap {
+  width: 44rpx;
+  height: 44rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.goal-emoji {
+  font-size: 32rpx;
+}
+
+.goal-count {
+  font-size: 24rpx;
+  color: #5B3A0A;
+  font-weight: bold;
+}
+
+.hud-right {
+  display: flex;
+  align-items: center;
+  background: rgba(0,0,0,0.4);
+  padding: 8rpx 20rpx;
+  border-radius: 24rpx;
+  gap: 8rpx;
+}
+
+.coin-icon {
+  font-size: 28rpx;
+}
+
+.coin-count {
+  font-size: 26rpx;
+  color: #FFD700;
+  font-weight: bold;
+}

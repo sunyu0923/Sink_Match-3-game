@@ -1,0 +1,66 @@
+[
+  {
+    "type": "chopstick",
+    "name": "筷子",
+    "icon": "/assets/images/utensils/chopstick.png",
+    "width": 55,
+    "height": 65,
+    "color": "#8B4513"
+  },
+  {
+    "type": "spoon",
+    "name": "勺子",
+    "icon": "/assets/images/utensils/spoon.png",
+    "width": 50,
+    "height": 60,
+    "color": "#C0C0C0"
+  },
+  {
+    "type": "fork",
+    "name": "叉子",
+    "icon": "/assets/images/utensils/fork.png",
+    "width": 45,
+    "height": 65,
+    "color": "#A9A9A9"
+  },
+  {
+    "type": "spatula",
+    "name": "锅铲",
+    "icon": "/assets/images/utensils/spatula.png",
+    "width": 55,
+    "height": 70,
+    "color": "#2F4F4F"
+  },
+  {
+    "type": "whisk",
+    "name": "打蛋器",
+    "icon": "/assets/images/utensils/whisk.png",
+    "width": 45,
+    "height": 70,
+    "color": "#D2691E"
+  },
+  {
+    "type": "ladle",
+    "name": "漏勺",
+    "icon": "/assets/images/utensils/ladle.png",
+    "width": 55,
+    "height": 65,
+    "color": "#708090"
+  },
+  {
+    "type": "board",
+    "name": "砧板",
+    "icon": "/assets/images/utensils/board.png",
+    "width": 65,
+    "height": 55,
+    "color": "#DEB887"
+  },
+  {
+    "type": "rolling_pin",
+    "name": "擀面杖",
+    "icon": "/assets/images/utensils/rolling_pin.png",
+    "width": 70,
+    "height": 40,
+    "color": "#F5DEB3"
+  }
+]

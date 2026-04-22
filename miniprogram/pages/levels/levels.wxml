@@ -1,0 +1,25 @@
+<view class="levels-page">
+  <view class="levels-header">
+    <text class="levels-title">选择关卡</text>
+  </view>
+
+  <scroll-view class="levels-grid-wrap" scroll-y>
+    <view class="levels-grid">
+      <view
+        class="level-card {{item.unlocked ? 'level-unlocked' : 'level-locked'}}"
+        wx:for="{{levels}}"
+        wx:key="id"
+        data-id="{{item.id}}"
+        bindtap="onLevelTap"
+      >
+        <text class="level-num">{{item.id}}</text>
+        <view class="level-stars" wx:if="{{item.unlocked && item.stars > 0}}">
+          <text class="lstar {{item.stars >= 1 ? 'lstar-on' : ''}}">★</text>
+          <text class="lstar {{item.stars >= 2 ? 'lstar-on' : ''}}">★</text>
+          <text class="lstar {{item.stars >= 3 ? 'lstar-on' : ''}}">★</text>
+        </view>
+        <text class="lock-icon" wx:if="{{!item.unlocked}}">🔒</text>
+      </view>
+    </view>
+  </scroll-view>
+</view>

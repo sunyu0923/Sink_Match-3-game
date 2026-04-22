@@ -1,0 +1,91 @@
+.game-page {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(180deg, #6B4E1B 0%, #8B6914 30%, #A07828 100%);
+  overflow: hidden;
+  position: relative;
+}
+
+.canvas-container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* --- 弹窗 --- */
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.modal-box {
+  background: linear-gradient(135deg, #FFF8E7, #F5E6C8);
+  border-radius: 24rpx;
+  padding: 60rpx 50rpx;
+  width: 560rpx;
+  text-align: center;
+  box-shadow: 0 8rpx 40rpx rgba(0,0,0,0.3);
+}
+
+.modal-title {
+  font-size: 44rpx;
+  font-weight: bold;
+  color: #5B3A0A;
+  display: block;
+  margin-bottom: 40rpx;
+}
+
+.modal-btns {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.modal-btns button {
+  width: 100%;
+  border-radius: 16rpx;
+  font-size: 32rpx;
+  padding: 20rpx 0;
+  border: none;
+}
+
+.btn-resume, .btn-next {
+  background: linear-gradient(135deg, #4CAF50, #388E3C);
+  color: #fff;
+}
+
+.btn-retry {
+  background: linear-gradient(135deg, #FF9800, #F57C00);
+  color: #fff;
+}
+
+.btn-quit {
+  background: #ddd;
+  color: #666;
+}
+
+/* --- 星星 --- */
+.stars-row {
+  display: flex;
+  justify-content: center;
+  gap: 20rpx;
+  margin-bottom: 30rpx;
+}
+
+.star {
+  font-size: 64rpx;
+  color: #ccc;
+}
+
+.star-active {
+  color: #FFD700;
+  text-shadow: 0 2rpx 8rpx rgba(255, 215, 0, 0.5);
+}
