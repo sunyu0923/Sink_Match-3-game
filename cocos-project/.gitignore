@@ -1,0 +1,10 @@
+library/
+local/
+temp/
+build/
+profiles/
+native/
+.vscode/
+.idea/
+*.log
+node_modules/

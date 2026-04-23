@@ -1,0 +1,10 @@
+{
+  "name": "sink-match3",
+  "uuid": "sink-match3-project-uuid",
+  "designResolution": {
+    "width": 720,
+    "height": 1280,
+    "policy": 4
+  },
+  "orientation": "portrait"
+}

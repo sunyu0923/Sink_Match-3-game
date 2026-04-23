@@ -1,0 +1,25 @@
+{
+  "name": "sink-match3-cocos",
+  "version": "1.0.0",
+  "description": "水槽消消乐 - Cocos Creator 3.x 微信小游戏",
+  "creator": {
+    "version": "3.8.0"
+  },
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "tsx tests/run.ts",
+    "gen-assets": "tsx tools/gen-placeholders.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@types/node": "^25.6.0",
+    "tsx": "^4.21.0",
+    "typescript": "^6.0.3"
+  }
+}
