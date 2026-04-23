@@ -6,5 +6,14 @@
     "height": 1280,
     "policy": 4
   },
-  "orientation": "portrait"
+  "orientation": "portrait",
+  "__version__": "1.0.6",
+  "fbx": {
+    "legacyFbxImporter": {
+      "visible": true
+    }
+  },
+  "script": {
+    "preserveSymlinks": true
+  }
 }

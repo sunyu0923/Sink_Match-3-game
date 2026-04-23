@@ -1,12 +1,16 @@
 {
   "modules": {
     "includeModules": [
-      "core",
       "2d",
-      "ui",
-      "tween",
+      "animation",
       "audio",
-      "wechat-mini-game"
+      "core",
+      "marionette",
+      "skeletal-animation",
+      "tween",
+      "ui",
+      "wechat-mini-game",
+      "legacy-pipeline"
     ]
   },
   "designResolution": {
@@ -14,5 +18,6 @@
     "height": 1280,
     "fitWidth": true,
     "fitHeight": true
-  }
+  },
+  "__version__": "1.0.12"
 }
