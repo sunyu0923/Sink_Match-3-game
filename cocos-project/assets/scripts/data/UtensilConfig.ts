@@ -1,25 +1,25 @@
 /**
- * 厨具类型定义（移植自旧版 utensils.js）
+ * 角色类型定义（动物主题 — 精灵图来自 kaixinxiaoxiaole）
  */
 
 export interface UtensilDef {
     type: string;
     name: string;
-    icon: string;        // 资源路径（textures/utensils/xxx）
+    icon: string;        // atlas 路径（textures/animals/xxx），resources.load 用
+    atlasFrame: string;  // 默认帧名（在 plist 中）
     width: number;
     height: number;
     color: string;       // 占位色（无图时使用）
 }
 
 export const UTENSILS: UtensilDef[] = [
-    { type: 'chopstick',   name: '筷子',     icon: 'textures/utensils/chopstick',   width: 90, height: 110, color: '#8B4513' },
-    { type: 'spoon',       name: '勺子',     icon: 'textures/utensils/spoon',       width: 90, height: 110, color: '#C0C0C0' },
-    { type: 'fork',        name: '叉子',     icon: 'textures/utensils/fork',        width: 90, height: 110, color: '#A9A9A9' },
-    { type: 'spatula',     name: '锅铲',     icon: 'textures/utensils/spatula',     width: 100, height: 120, color: '#2F4F4F' },
-    { type: 'whisk',       name: '打蛋器',   icon: 'textures/utensils/whisk',       width: 90, height: 120, color: '#D2691E' },
-    { type: 'ladle',       name: '漏勺',     icon: 'textures/utensils/ladle',       width: 100, height: 110, color: '#708090' },
-    { type: 'board',       name: '砧板',     icon: 'textures/utensils/board',       width: 110, height: 90,  color: '#DEB887' },
-    { type: 'rolling_pin', name: '擀面杖',   icon: 'textures/utensils/rolling_pin', width: 120, height: 70,  color: '#F5DEB3' }
+    { type: 'chopstick', name: '熊',   icon: 'textures/animals/bear',    atlasFrame: 'bear_click_00',    width: 70, height: 69, color: '#8B4513' },
+    { type: 'spoon',     name: '鸟',   icon: 'textures/animals/bird',    atlasFrame: 'bird_click_00',    width: 70, height: 69, color: '#4FC3F7' },
+    { type: 'fork',      name: '猫',   icon: 'textures/animals/cat',     atlasFrame: 'cat_click_00',     width: 70, height: 69, color: '#FF9800' },
+    { type: 'spatula',   name: '鸡',   icon: 'textures/animals/chicken', atlasFrame: 'chicken_click_00', width: 70, height: 69, color: '#FFEB3B' },
+    { type: 'whisk',     name: '狐狸', icon: 'textures/animals/fox',     atlasFrame: 'fox_click_00',     width: 70, height: 69, color: '#FF5722' },
+    { type: 'ladle',     name: '青蛙', icon: 'textures/animals/frog',    atlasFrame: 'frog_click_00',    width: 70, height: 69, color: '#4CAF50' },
+    { type: 'board',     name: '马',   icon: 'textures/animals/horse',   atlasFrame: 'horse_click_00',   width: 70, height: 69, color: '#795548' }
 ];
 
 export const UTENSILS_MAP: Record<string, UtensilDef> = UTENSILS.reduce((acc, u) => {

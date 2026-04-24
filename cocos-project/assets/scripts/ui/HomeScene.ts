@@ -5,7 +5,7 @@ import { Node } from 'cc';
 import { GAME_CONSTANTS } from '../data/GameConstants';
 import { StorageService } from '../services/StorageService';
 import { IScene, SceneRouter, SceneType } from './SceneRouter';
-import { makeNode, makeLabel, makeRoundRect, loadSpriteFrame, makeSprite } from './UIKit';
+import { makeNode, makeLabel, makeRoundRect, loadSpriteFrame, loadFromAtlas, makeSprite } from './UIKit';
 
 export class HomeScene implements IScene {
     rootNode: Node;
@@ -17,10 +17,14 @@ export class HomeScene implements IScene {
         const W = GAME_CONSTANTS.DESIGN_WIDTH;
         const H = GAME_CONSTANTS.DESIGN_HEIGHT;
 
-        // 背景（使用 textures/bg 占位）
-        loadSpriteFrame('textures/bg').then(sf => {
-            if (sf) makeSprite(sf, { name: 'BG', width: W, height: H, parent: this.rootNode });
-            else makeRoundRect(W, H, 0, '#3a7d44', { parent: this.rootNode });
+        // 背景（使用 login.jpg）
+        loadSpriteFrame('textures/bg/login').then(sf => {
+            if (sf) {
+                const bg = makeSprite(sf, { name: 'BG', width: W, height: H, parent: this.rootNode });
+                bg.node.setSiblingIndex(0);
+            } else {
+                makeRoundRect(W, H, 0, '#3a7d44', { parent: this.rootNode });
+            }
         });
 
         // 标题

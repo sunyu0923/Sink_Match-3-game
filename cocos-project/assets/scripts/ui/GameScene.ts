@@ -11,7 +11,7 @@ import { UTENSILS_MAP } from '../data/UtensilConfig';
 import { StorageService } from '../services/StorageService';
 import { AdService } from '../services/AdService';
 import { IScene, SceneRouter, SceneType } from './SceneRouter';
-import { makeNode, makeLabel, makeRoundRect, makeCircle, makeSprite, loadSpriteFrame, parseColor } from './UIKit';
+import { makeNode, makeLabel, makeRoundRect, makeCircle, makeSprite, loadSpriteFrame, loadFromAtlas, parseColor } from './UIKit';
 
 const W = GAME_CONSTANTS.DESIGN_WIDTH;
 const H = GAME_CONSTANTS.DESIGN_HEIGHT;
@@ -51,7 +51,7 @@ export class GameScene implements IScene {
         const cfg = LevelManager.getLevel(levelId) || LevelManager.getLevel(1)!;
 
         // 背景
-        loadSpriteFrame('textures/bg').then(sf => {
+        loadSpriteFrame('textures/bg/main_background').then(sf => {
             if (sf) makeSprite(sf, { name: 'BG', width: W, height: H, parent: this.rootNode });
             else makeRoundRect(W, H, 0, '#a8835a', { parent: this.rootNode });
         });
@@ -104,8 +104,8 @@ export class GameScene implements IScene {
             const def = UTENSILS_MAP[type];
             if (!def) continue;
             const bg = makeRoundRect(110, 50, 14, '#FFF3D6', { parent: this.goalGroup, x: offset + 55, y: 0 });
-            // 厨具图标占位
-            loadSpriteFrame(def.icon).then(sf => {
+            // 动物图标
+            loadFromAtlas(def.icon, def.atlasFrame).then(sf => {
                 if (sf) {
                     makeSprite(sf, { parent: bg.node, x: -28, y: 4, width: 40, height: 40 });
                 } else {
@@ -221,7 +221,7 @@ export class GameScene implements IScene {
             if (old) old.destroy();
             if (item) {
                 const def = UTENSILS_MAP[item.type];
-                loadSpriteFrame(def.icon).then(sf => {
+                loadFromAtlas(def.icon, def.atlasFrame).then(sf => {
                     if (cell.isValid) {
                         const n = sf
                             ? makeSprite(sf, { name: 'QItem', parent: cell, width: 56, height: 56 }).node
@@ -273,7 +273,7 @@ export class GameScene implements IScene {
         const node = makeNode({ name: 'U_' + it.id, parent: this.utensilLayer, width: it.width, height: it.height });
         node.setPosition(it.x, it.y, 0);
         node.setSiblingIndex(it.layer * 1000 + Math.floor((-it.y + 1000)));
-        loadSpriteFrame(def.icon).then(sf => {
+        loadFromAtlas(def.icon, def.atlasFrame).then(sf => {
             if (!node.isValid) return;
             if (sf) {
                 makeSprite(sf, { parent: node, width: it.width, height: it.height });

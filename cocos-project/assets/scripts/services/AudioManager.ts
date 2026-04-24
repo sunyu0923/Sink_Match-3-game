@@ -42,4 +42,37 @@ export class AudioManager {
     }
 
     setEnabled(enabled: boolean): void { this.enabled = enabled; }
+
+    /** 预加载所有游戏音效（来自 kaixinxiaoxiaole 资源） */
+    async preloadAll(): Promise<void> {
+        // BGM
+        await this.preload('bgm_game', 'audio/gamescenebgm');
+        await this.preload('bgm_world', 'audio/worldscenebgm');
+        // 交互音效
+        await this.preload('click', 'audio/click.bubble');
+        await this.preload('swap', 'audio/swap');
+        await this.preload('drop', 'audio/drop');
+        // 消除音效 1-8
+        for (let i = 1; i <= 8; i++) {
+            await this.preload(`eliminate${i}`, `audio/eliminate${i}`);
+        }
+        // 连击音效
+        for (const n of [3, 5, 7, 9, 11]) {
+            await this.preload(`combo${n}`, `audio/contnuousMatch${n}`);
+        }
+    }
+
+    playBGM(name: string = 'bgm_game'): void {
+        if (!this.enabled) return;
+        const clip = this.clips.get(name);
+        if (!clip) return;
+        const src = this.ensureSource();
+        src.clip = clip;
+        src.loop = true;
+        src.play();
+    }
+
+    stopBGM(): void {
+        if (this.source) this.source.stop();
+    }
 }

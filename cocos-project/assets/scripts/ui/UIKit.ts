@@ -1,7 +1,7 @@
 /**
  * UI 工具：通过代码批量构造常用 Cocos UI 节点
  */
-import { Color, Label, Node, Sprite, SpriteFrame, UITransform, Vec3, Graphics, color, instantiate, resources, Layers, HorizontalTextAlignment, VerticalTextAlignment } from 'cc';
+import { Color, Label, Node, Sprite, SpriteFrame, SpriteAtlas, UITransform, Vec3, Graphics, color, instantiate, resources, Layers, HorizontalTextAlignment, VerticalTextAlignment } from 'cc';
 
 export interface MakeNodeOpts {
     name?: string;
@@ -86,6 +86,21 @@ export function loadSpriteFrame(path: string): Promise<SpriteFrame | null> {
                 // 回退尝试不带 /spriteFrame
                 resources.load(path, SpriteFrame, (e2, sf2) => resolve(e2 ? null : sf2));
             } else resolve(sf);
+        });
+    });
+}
+
+/** 从 SpriteAtlas（plist）加载指定帧 */
+export function loadFromAtlas(atlasPath: string, frameName: string): Promise<SpriteFrame | null> {
+    return new Promise(resolve => {
+        resources.load(atlasPath, SpriteAtlas, (err, atlas) => {
+            if (err || !atlas) {
+                // 回退为普通精灵帧加载
+                loadSpriteFrame(atlasPath).then(resolve);
+                return;
+            }
+            const sf = atlas.getSpriteFrame(frameName);
+            resolve(sf || null);
         });
     });
 }

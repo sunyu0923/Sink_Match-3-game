@@ -1,12 +1,12 @@
 /**
  * 关卡选择：4 列网格
  */
-import { Node } from 'cc';
+import { Color, Node } from 'cc';
 import { GAME_CONSTANTS } from '../data/GameConstants';
 import { StorageService } from '../services/StorageService';
 import { LevelManager } from '../game/LevelManager';
 import { IScene, SceneRouter, SceneType } from './SceneRouter';
-import { makeNode, makeLabel, makeRoundRect } from './UIKit';
+import { makeNode, makeLabel, makeRoundRect, loadSpriteFrame, makeSprite } from './UIKit';
 
 export class LevelScene implements IScene {
     rootNode: Node;
@@ -18,7 +18,14 @@ export class LevelScene implements IScene {
         const W = GAME_CONSTANTS.DESIGN_WIDTH;
         const H = GAME_CONSTANTS.DESIGN_HEIGHT;
         // 背景
-        makeRoundRect(W, H, 0, '#1a3d22', { parent: this.rootNode });
+        loadSpriteFrame('textures/ui/background').then(sf => {
+            if (sf) {
+                const bg = makeSprite(sf, { name: 'BG', width: W, height: H, parent: this.rootNode });
+                bg.node.setSiblingIndex(0);
+            } else {
+                makeRoundRect(W, H, 0, '#1a3d22', { parent: this.rootNode });
+            }
+        });
 
         // 标题 + 返回
         makeLabel('选择关卡', { parent: this.rootNode, x: 0, y: H / 2 - 60, fontSize: 40, bold: true, color: '#FFFFFF' });
@@ -50,10 +57,24 @@ export class LevelScene implements IScene {
             if (unlocked) {
                 makeLabel(String(id), { parent: cell.node, fontSize: 36, bold: true, color: '#FFFFFF' });
                 const s = stars[id] || 0;
-                makeLabel('⭐'.repeat(s) + '☆'.repeat(3 - s), { parent: cell.node, fontSize: 18, y: -cellH / 2 + 18, color: '#FFD700' });
+                // 用图标显示星级
+                const starX0 = -30;
+                for (let si = 0; si < 3; si++) {
+                    const filled = si < s;
+                    loadSpriteFrame('textures/ui/star').then(sf => {
+                        if (sf && cell.node.isValid) {
+                            const sp = makeSprite(sf, { parent: cell.node, x: starX0 + si * 22, y: -cellH / 2 + 18, width: 20, height: 20 });
+                            if (!filled) sp.sprite.color = new Color(80, 80, 80, 180);
+                        }
+                    });
+                }
                 cell.node.on(Node.EventType.TOUCH_END, () => SceneRouter.goTo(SceneType.GAME, { levelId: id }));
             } else {
-                makeLabel('🔒', { parent: cell.node, fontSize: 36, color: '#888888' });
+                // 用锁图标代替 emoji
+                loadSpriteFrame('textures/ui/lock').then(sf => {
+                    if (sf && cell.node.isValid) makeSprite(sf, { parent: cell.node, width: 36, height: 36 });
+                    else makeLabel('🔒', { parent: cell.node, fontSize: 36, color: '#888888' });
+                });
                 makeLabel(String(id), { parent: cell.node, fontSize: 18, y: -cellH / 2 + 18, color: '#666666' });
             }
         }
