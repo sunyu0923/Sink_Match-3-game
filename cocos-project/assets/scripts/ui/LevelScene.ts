@@ -23,7 +23,8 @@ export class LevelScene implements IScene {
                 const bg = makeSprite(sf, { name: 'BG', width: W, height: H, parent: this.rootNode });
                 bg.node.setSiblingIndex(0);
             } else {
-                makeRoundRect(W, H, 0, '#1a3d22', { parent: this.rootNode });
+                const bg = makeRoundRect(W, H, 0, '#1a3d22', { parent: this.rootNode });
+                bg.node.setSiblingIndex(0);
             }
         });
 

@@ -8,3 +8,12 @@ native/
 .idea/
 *.log
 node_modules/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Local AI/editor assistant configs
+.claude/
+.cursor/

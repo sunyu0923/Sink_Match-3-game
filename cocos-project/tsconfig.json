@@ -1,18 +1,16 @@
 {
   "compilerOptions": {
     "strict": false,
-    "target": "ES2017",
-    "module": "ES2015",
-    "moduleResolution": "node",
+    "target": "ES2020",
+    "module": "ES2020",
+    "moduleResolution": "bundler",
     "experimentalDecorators": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": false,
-    "ignoreDeprecations": "6.0",
-    "baseUrl": ".",
-    "paths": {
-      "cc": ["cc.d.ts"]
-    }
+    "forceConsistentCasingInFileNames": true,
+    "esModuleInterop": true,
+    "outDir": "./temp/programming/pipe-script",
+    "rootDir": "./assets"
   },
-  "include": ["assets/scripts/**/*.ts", "cc.d.ts"],
+  "include": ["assets/**/*.ts"],
   "exclude": ["node_modules", "library", "local", "temp", "build", "settings", "tests"]
 }

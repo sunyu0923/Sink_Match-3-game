@@ -2,7 +2,7 @@
  * 主游戏场景：HUD / 盘子+队列条 / 水槽 / 道具栏
  * 布局参考截图：木质背景、目标气泡、圆形锅、盘子+解锁按钮、底部圆形道具按钮
  */
-import { _decorator, Node, Vec3, Sprite, UITransform, tween, Tween, Color, Label } from 'cc';
+import { Node, Vec3, Sprite, UITransform, tween, Color, Label } from 'cc';
 import { GAME_CONSTANTS, GameState } from '../data/GameConstants';
 import { LevelManager } from '../game/LevelManager';
 import { GameLogic, GameSnapshot } from '../game/GameLogic';
@@ -41,6 +41,7 @@ export class GameScene implements IScene {
 
     private modalNode: Node | null = null;
     private updateScheduled = false;
+    private updateTimer: ReturnType<typeof setInterval> | null = null;
 
     constructor(parent: Node) {
         this.rootNode = makeNode({ name: 'GameScene', width: W, height: H, parent });
@@ -52,8 +53,13 @@ export class GameScene implements IScene {
 
         // 背景
         loadSpriteFrame('textures/bg/main_background').then(sf => {
-            if (sf) makeSprite(sf, { name: 'BG', width: W, height: H, parent: this.rootNode });
-            else makeRoundRect(W, H, 0, '#a8835a', { parent: this.rootNode });
+            if (sf) {
+                const bg = makeSprite(sf, { name: 'BG', width: W, height: H, parent: this.rootNode });
+                bg.node.setSiblingIndex(0);
+            } else {
+                const bg = makeRoundRect(W, H, 0, '#a8835a', { parent: this.rootNode });
+                bg.node.setSiblingIndex(0);
+            }
         });
 
         // === 初始化逻辑 ===
@@ -71,6 +77,10 @@ export class GameScene implements IScene {
 
     onExit(): void {
         this.updateScheduled = false;
+        if (this.updateTimer) {
+            clearInterval(this.updateTimer);
+            this.updateTimer = null;
+        }
     }
 
     // ===== HUD =====
@@ -317,9 +327,14 @@ export class GameScene implements IScene {
 
     // ===== 主循环 =====
     private scheduleUpdate(): void {
+        if (this.updateTimer) {
+            clearInterval(this.updateTimer);
+            this.updateTimer = null;
+        }
         this.updateScheduled = true;
-        const tick = (dt: number) => {
+        const tick = () => {
             if (!this.updateScheduled || !this.rootNode.isValid) return;
+            const dt = 1 / 60;
             this.timeAccum += dt;
             // 浮动
             for (const it of this.logic.sinkPool.getVisible()) {
@@ -331,9 +346,8 @@ export class GameScene implements IScene {
                 }
             }
             this.logic.tick(dt);
-            this.rootNode.scene && requestAnimationFrame(() => tick(1 / 60));
         };
-        requestAnimationFrame(() => tick(1 / 60));
+        this.updateTimer = setInterval(tick, 1000 / 60);
     }
 
     // ===== 道具 =====
